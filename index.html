@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101114">
+  <title>Hollowmere — The Gloamwood</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="brand-mark">✦</div>
+      <div class="brand"><strong>HOLLOWMERE</strong><span>FIELD NOTES · 07</span></div>
+      <div class="chapter"><i></i> THE GLOAMWOOD <span>—</span> NIGHT 01</div>
+      <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">♫ <span>ON</span></button>
+    </header>
+    <section class="game-layout">
+      <div class="viewport-wrap">
+        <div class="viewport" id="viewport">
+          <canvas id="game" width="480" height="270" aria-label="Hollowmere game world"></canvas>
+          <div class="vignette"></div>
+          <div id="toast" class="toast"></div>
+          <div id="battle" class="battle hidden">
+            <div class="battle-topline"><span>WILD ENCOUNTER</span><span id="battlePlace">THE GLOAMWOOD</span></div>
+            <div class="enemy-card">
+              <div class="enemy-copy"><span class="eyebrow" id="enemyType">SHADELING · WILD</span><strong id="enemyName">Murkling</strong><div class="health-track"><i id="enemyHealth"></i></div><small id="enemyHpText">18 / 18 VIT</small></div>
+              <div class="battle-sprite" id="enemySprite"></div>
+            </div>
+            <div class="battle-log" id="battleLog">Something stirs in the bracken.</div>
+            <div class="battle-bottom">
+              <div class="active-creature"><div class="mini-sprite" id="allySprite"></div><div><span id="allyName">Mothkin</span><small>VIT <b id="allyHpText">24 / 24</b></small></div><div class="ally-track"><i id="allyHealth"></i></div></div>
+              <div class="battle-actions" id="battleActions">
+                <button data-action="fight"><span>01</span> Strike</button>
+                <button data-action="snare"><span>02</span> Snare <em id="snareCount">× 3</em></button>
+                <button data-action="tonic"><span>03</span> Tonic</button>
+                <button data-action="run"><span>04</span> Flee</button>
+              </div>
+            </div>
+          </div>
+          <div id="evolution" class="evolution hidden"><div class="evo-symbol">✷</div><span class="eyebrow">A CHANGE IN THE DARK</span><h2>Mothkin evolved</h2><p>Something ancient has awakened.</p><button id="evoContinue">CONTINUE <span>→</span></button></div>
+          <div id="intro" class="intro-card">
+            <span class="eyebrow">A FIELD GUIDE TO THE UNLIVING</span>
+            <h1>THE WOODS<br><i>ARE LISTENING.</i></h1>
+            <p>Catch what crawls from the dark.<br>Keep it close. It will remember you.</p>
+            <button id="begin">ENTER THE GLOAM <span>→</span></button>
+            <small>WASD / ARROWS TO MOVE · E TO INTERACT</small>
+          </div>
+          <div id="locationLabel" class="location-label"><span class="location-dot"></span><span id="locationName">THE GLOAMWOOD</span><small id="locationSub">THE OLD ROAD</small></div>
+          <div id="objective" class="objective"><span class="objective-icon">✧</span><span><small>YOUR PURPOSE</small><b id="objectiveText">Find the three lost sigils</b></span><i id="sigilCount">0 / 3</i></div>
+        </div>
+        <div class="underbar"><span><i class="keycap">WASD</i> MOVE <i class="keycap">E</i> INTERACT</span><span id="weather">✦ &nbsp;THE FOG IS THICK TONIGHT</span><span class="coordinate" id="coord">X 08 · Y 08</span></div>
+      </div>
+      <aside class="sidebar">
+        <div class="side-heading"><span>YOUR COMPANION</span><span class="alive-dot"></span></div>
+        <div class="companion-card"><div class="companion-portrait"><div class="portrait-glow"></div><div class="portrait-moth">✦</div></div><div class="companion-info"><span class="eyebrow">NO. 001 · GLOAM</span><h2 id="sideAllyName">Mothkin</h2><div class="level-line"><span>LV <b id="allyLevel">01</b></span><span id="allyMood">RESTLESS</span></div><div class="side-hp"><i id="sideHealth"></i></div><small id="sideHpText">24 / 24 VIT</small></div></div>
+        <div class="side-divider"></div>
+        <div class="side-heading"><span>FIELD KIT</span><span class="inventory-total" id="itemCount">03</span></div>
+        <div class="kit-row"><span class="kit-icon snare-icon">⌁</span><div><b>Wisp snares</b><small>Bind a weakened spirit</small></div><strong id="kitSnares">03</strong></div>
+        <div class="kit-row"><span class="kit-icon tonic-icon">✚</span><div><b>Gloam tonic</b><small>Restore 12 vitality</small></div><strong id="kitTonics">02</strong></div>
+        <div class="side-divider"></div>
+        <div class="side-heading"><span>FIELD NOTES</span><span class="notes-count">01</span></div>
+        <div class="note-card"><span class="note-pin">✦</span><p>“A thing caught in a snare may yet become a friend. Or a warning.”</p><small>— FROM THE WARDEN'S JOURNAL</small></div>
+        <div class="sidebar-footer"><span class="save-dot"></span><span id="saveStatus">AUTOSAVED</span><button id="resetGame" title="Start a new game">RESET ↻</button></div>
+      </aside>
+    </section>
+    <nav class="mobile-controls" aria-label="Touch controls">
+      <div class="dpad"><button data-dir="up" aria-label="Move up">▲</button><button data-dir="left" aria-label="Move left">◀</button><button data-dir="down" aria-label="Move down">▼</button><button data-dir="right" aria-label="Move right">▶</button></div>
+      <div class="touch-actions"><button id="touchSwitch" class="touch-switch">PARTY <span>Q</span></button><button id="touchInteract" class="touch-action">INTERACT <span>E</span></button></div>
+    </nav>
+    <footer><span>HOLLOWMERE COUNTY · EST. 1891</span><span>KEEP YOUR LANTERN CLOSE <b>✦</b></span></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
